@@ -1,0 +1,83 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+html{
+	height: 100%;margin: 
+	0 !important;
+    padding: 0 !important;
+}
+
+body {
+	background-color: #999999;
+	height: 100%;
+	margin: 0 !important;
+    padding: 0 !important;
+}
+
+#banner{
+	z-index: 1;
+	position:fixed;
+	width: 100%;
+	height: 8%;
+	background: black;
+	color : white;
+}
+
+	
+	
+.middle {
+	position: relative;
+	top: 5%;
+	z-index: 0;
+	height: 95%;
+	width: 80%;
+	margin-top: 0 !important;
+    padding: 20px;
+	margin-left: 10%;
+	margin-right: 10%;
+	background-color: #ffffff;
+	box-shadow: 15px 15px grey;
+}
+
+
+.plant_type{
+	width: 60%;
+}
+
+.max{
+	position: absolute;
+	margin-top: 5px;
+	right: 0;
+	width : 70%;
+}
+
+.min{
+	margin-top: 5px;
+	position: absolute;
+	left: 1;
+	width: 30%;
+}
+
+.container{
+	position: absolute;
+	width: 95%;
+	height: 100%;
+	margin: 2px;
+	padding: 5px;
+}
+
+.interface {
+	width: 95%;
+	margin: 5px;
+	padding: 5px;
+}
+
+#save{
+	position: absolute;
+	bottom: 20px;
+	right: 10px;
+	width: 150px;
+	height: 75px;
+}

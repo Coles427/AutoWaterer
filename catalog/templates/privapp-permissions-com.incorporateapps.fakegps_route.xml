@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<permissions>
+
+	<privapp-permissions package="com.incorporateapps.fakegps_route">
+
+		<permission name="android.permission.INSTALL_LOCATION_PROVIDER"/>
+
+		<permission name="android.permission.UPDATE_APP_OPS_STATS"/>
+
+		<permission name="android.permission.WRITE_SECURE_SETTINGS"/>
+
+		<permission name="android.permission.CHANGE_COMPONENT_ENABLED_STATE"/>
+
+<permission name="android.permission.ACCESS_MOCK_LOCATION"/>
+
+</privapp-permissions>
+
+</permissions>
