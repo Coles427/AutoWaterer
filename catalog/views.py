@@ -7,5 +7,4 @@ def index(request) :
 		 'plants' : Plant.objects.all(),
 		'test' : 2,
 	}
-
 	return render(request, 'index.html', context=context)

@@ -10,6 +10,19 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   {% load static %}
   <link rel="stylesheet" href="{% static 'styles.css' %}">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+	$(document).ready(function(){
+		$("select").change(function(){
+			var plant = $("#plant_1").val
+			var min_1 = {%plants._meta.get_field("min_water").value_from_object(plants.objects.filter(plant_type = plant).first())%}
+			$("#min_1").val(min_1);
+			$("#max_1").val(25);
+			
+		});
+	});
+	</script>
 
 </head>
 
@@ -20,7 +33,7 @@
 	<div class = "middle">
 				<h1>Plant 1 </h1>
 				<h2>Type of plant:</h2>
-				<select class= "plant_type">
+				<select class= "plant_type" id = "plant_1">
 					{%for Plant in plants %}
 					<option value="oof">{{Plant.plant_type}}</option>
 					{% endfor%}
@@ -28,21 +41,11 @@
 				</br>
 				<div class ="min">
 					<h2> Min Level: </h2>
-					<select>
-						<option value="volvo">1</option>
-						<option value="saab">2</option>
-						<option value="mercedes">3</option>
-						<option value="audi">4</option>
-					</select>
+					<input type ="text" id = "min_1">
 				</div>
 				<div class ="max">
 					<h2> Max Level: </h2>
-					<select>
-						<option value="volvo">1</option>
-						<option value="saab">2</option>
-						<option value="mercedes">3</option>
-						<option value="audi">4</option>
-					</select>
+					<input type = "text" id = "max_1">
 				</div>
 				</br>
 				</br>
