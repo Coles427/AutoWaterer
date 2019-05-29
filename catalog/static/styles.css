@@ -41,6 +41,11 @@ body {
 	box-shadow: 15px 15px grey;
 }
 
+#write_txt{
+	position: relative;
+	top: 90px;
+}
+
 
 .plant_type{
 	width: 60%;

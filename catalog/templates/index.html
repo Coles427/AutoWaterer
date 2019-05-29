@@ -14,14 +14,144 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script>
 	$(document).ready(function(){
-		$("select").change(function(){
-			var plant = $("#plant_1").val
-			var min_1 = {%plants._meta.get_field("min_water").value_from_object(plants.objects.filter(plant_type = plant).first())%}
-			$("#min_1").val(min_1);
-			$("#max_1").val(25);
+		var new_1 = false;
+		var new_2 = false;
+		$("#plant_1").change(function(){		
+			if($("#plant_1").val() == "new_plant"){
+				var new_name = prompt("Enter a name for the plant");
+				var opt = document.createElement('option');
+				opt.appendChild( document.createTextNode(new_name) );
+				opt.value = new_name;
+				$("#plant_1").append(opt);
+				$("#plant_1").val(new_name);
+				new_1 = true;
+			}
 			
+			else{
+				$.ajax(
+				{
+					type:"GET",
+					url: "/get_min",
+					data:{
+						plant_type: $("#plant_1").val()
+					},
+					success: function( data ) 
+					{
+						$("#min_1").val(data);
+					}
+				})
+
+				$.ajax(
+				{
+					type:"GET",
+					url: "/get_max",
+					data:{
+						plant_type: $("#plant_1").val()
+					},
+					success: function( data ) 
+					{
+						$("#max_1").val(data);
+					}
+				})
+			}	
 		});
+		
+		$("#plant_2").change(function(){
+			if($("#plant_2").val() == "new_plant"){
+				var new_name = prompt("Enter a name for the plant");
+				var opt = document.createElement('option');
+				opt.appendChild( document.createTextNode(new_name) );
+				opt.value = new_name;
+				$("#plant_2").append(opt);
+				$("#plant_2").val(new_name);
+				new_1 = true;
+			}
+			
+			else{	
+				$.ajax(
+				{
+					type:"GET",
+					url: "/get_min",
+					data:{
+						plant_type: $("#plant_2").val()
+					},
+					success: function( data ) 
+					{
+						$("#min_2").val(data);
+					}
+				})
+
+				$.ajax(
+				{
+					type:"GET",
+					url: "/get_max",
+					data:{
+						plant_type: $("#plant_2").val()
+					},
+					success: function( data ) 
+					{
+						$("#max_2").val(data);
+					}
+				})
+			}
+			});
+		
+		
+		$("#save").click(function(){
+			if( new_1 || new_2 == true){
+				if(new_1 == true){
+					$.ajax({
+						type:"GET",
+						url: "/save",
+						data:{
+							plant_type : $("#plant_1").val(),
+							min_water : $("#min_1").val(),
+							max_water : $("#max_1").val()
+						},
+						success: function( data ) 
+						{
+							
+						}
+					})
+				}
+				new_1 = false;
+				
+				if(new_2 == true){
+					$.ajax({
+						type:"GET",
+						url: "/save",
+						data:{
+							plant_type : $("#plant_2").val(),
+							min_water : $("#min_2").val(),
+							max_water : $("#max_2").val()
+						},
+						success: function( data ) 
+						{
+							
+						}
+					})
+				}
+				
+				
+				window.alert("Saved!")
+				new_1 = false;
+				new_2 = false;
+			}
+			
+			$.ajax({
+					type:"GET",
+					url: "/write",
+					data:{
+						plant_1_id : $("#plant_1").val(),
+						plant_2_id : $("#plant_2").val()
+						},
+					success : function( data ){
+						$(write_txt).text("Wrote to waterer");
+					}
+			})
+		})
 	});
+	
 	</script>
 
 </head>
@@ -35,8 +165,9 @@
 				<h2>Type of plant:</h2>
 				<select class= "plant_type" id = "plant_1">
 					{%for Plant in plants %}
-					<option value="oof">{{Plant.plant_type}}</option>
+					<option value={{Plant.plant_type}}>{{Plant.plant_type}}</option>
 					{% endfor%}
+					<option value="new_plant"> New plant...</option>
 				</select>
 				</br>
 				<div class ="min">
@@ -53,31 +184,23 @@
 				</br>
 				<h1>Plant 2 </h1>
 				<h2>Type of plant:</h2>
-				<select class= "plant_type">
+				<select class= "plant_type" id="plant_2">
 					{%for Plant in plants %}
-					<option value="oof">{{Plant.plant_type}}</option>
+					<option value={{Plant.plant_type}}>{{Plant.plant_type}}</option>
 					{% endfor%}
+					<option value="new_plant"> New plant...</option>
 				</select>
 				</br>
 				<div class ="min">
 					<h2> Min Level: </h2>
-					<select>
-						<option value="volvo">1</option>
-						<option value="saab">2</option>
-						<option value="mercedes">3</option>
-						<option value="audi">4</option>
-					</select>
+					<input type="text" id="min_2">
 					
 				</div>
 				<div class ="max">
 					<h2> Max Level: </h2>
-					<select>
-						<option value="volvo">1</option>
-						<option value="saab">2</option>
-						<option value="mercedes">3</option>
-						<option value="audi">4</option>
-					</select>
+					<input type="text" id="max_2">
 				</div>
+				<p id="write_txt"></p>
 				<button id="save" type="button">Save</button>
 	</div>	
 	
