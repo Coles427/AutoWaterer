@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from catalog.models import Plant
+from catalog.models import Plant, WaterDat
 from django.views.generic.edit import CreateView
 from django.http import HttpResponse
 import csv
@@ -13,6 +13,14 @@ def index(request) :
 		'test' : 2,
 	}
 	return render(request, 'index.html', context=context)
+	
+def charts(request) :
+	
+	context = {
+		 'plants' : Plant.objects.all(),
+		'WaterDat' : WaterDat.objects.all()
+	}
+	return render(request, 'charts.html', context=context)	
 	
 def get_min(request) :
 	if request.method == 'GET':

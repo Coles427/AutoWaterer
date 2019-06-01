@@ -18,3 +18,9 @@ class Plant(models.Model):
 	min_water = models.IntegerField()
 	max_water = models.IntegerField()
 	
+class WaterDat(models.Model):
+	def __int__(self):
+		return self.plant_num
+	plant_num = models.IntegerField()
+	current_level = models.IntegerField()
+	current_time = models.DateTimeField(auto_now = False, auto_now_add = True)
