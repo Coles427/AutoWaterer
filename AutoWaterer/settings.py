@@ -25,7 +25,7 @@ SECRET_KEY = 'ml+_g0-potte&4f@eqp&1grmx6*ls-p7x)w&dzgv#3nc2r5g5e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
